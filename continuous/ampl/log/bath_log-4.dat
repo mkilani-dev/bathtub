@@ -1,0 +1,26 @@
+# This is the case of medium utility in Arnott and Buli
+
+# MODEL PARAMETERS
+param P    := 32.6  ;
+param K    := 10.0  ;
+param vf   := 15.0  ;
+param TMAX :=  6.0  ;
+param L    :=  4.0  ;
+param eps  :=  0.01 ;
+
+
+# LOG UTILITY FUNCTION
+param R0 := 15.0;
+param R1 :=  0.5;
+param S0 := 18.0;
+param S1 :=  1.0;
+
+
+# SIZE OF THE APPROXIMATION GRID
+# NUMBER OF POINTS WITHIN AN INTERVAL
+# OF LENGTH L : q0 
+param q0 := 25 ;  
+
+# END POINTS
+param M0   := 10.55  ;
+param Mbar := 45.68  ;

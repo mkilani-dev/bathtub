@@ -1,0 +1,77 @@
+# CLEAR MEMORY
+reset ;
+
+
+# set search path
+#option ampl_include '/home/moez/Downloads/amplide.linux64/amplide/';
+
+# LOAD MODEL
+model 'bath_log.mod' ;
+#model bath.mod ;
+
+# LOAD DATA
+data  'bath_log-4.dat' ; 
+#data  bath.dat ;
+
+# Approximation grid
+ 
+let q  := q0 + 1;
+param dL := L / q0  ;
+param nL := ( Mbar - M0 ) div  L  ;
+param q1 := 1+( ( Mbar - nL * L - M0 ) div dL );
+# param n  := q1 * ( nL + 1 ) + (q0-q1+2)*nL ;
+let n := q * nL + q1 + 1 ;
+param M1 := Mbar - nL * L ; 
+
+for { i in 1..q1  } { 
+  for { j in 0 .. nL+1 } {
+     let B[i+j*q] := M0 + (i-1) * dL + j * L;
+     }
+  }
+
+for {j in 0 .. nL+1 } {  
+   let B[q1+1+j*q] := M1 + j * L ;
+   }
+
+
+for { i in q1+2..q } {
+  for { j in 0 .. nL } {
+     let B[i + j * q] := B[q1] + dL * (i - (q1+1)) + j * L;
+     }
+  }
+
+
+# Print initial solution
+display t[n+q] , util_log;
+
+
+# Provide solver (change depending on machine)
+option solver "/home/moez/ulco/ampl/conopt" ;
+#option solver ipopt ;
+#option solver "/home/moez/ulco/ampl/minos" ;
+
+objective last_arrival_time;
+solve ;
+
+display t[n+q] , util_log;
+
+option conopt_options 'outlev=3';
+option display_width 100 ;
+
+# The logarithlic utility
+objective util_log ; 
+
+# Solve
+solve ;
+
+# Compute arrival time for each mass
+var tt {i in 1..n} = t[i+q] ;
+
+# Print solution
+display t[n+q] , util_log, util_log / P;
+display  B, e, k, v, ue_log, ux_log, t, tt ; 
+
+# Export solution to csv file
+display  B, e, k, v, ue_log, ux_log, t,tt > 'sol4.csv' ;
+
+end;
