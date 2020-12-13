@@ -12,8 +12,8 @@ Two types of utility functions are considered:
 
 The Fortran code calls some standard functions and libraries:
 
-- DFZERO function
-- lapack and Blas
+- DFZERO 
+- Lapack and Blas
 
 and relies on 
 
