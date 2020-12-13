@@ -6,7 +6,7 @@ C The main program and subroutine are in this file. Routines from
 C reading dat input and displaying output are in put in file
 C "auxiliary.f".
 C 
-C The main program call a first subroutines to read data input and then
+C The main program calls a first subroutines to read data input and then
 C calls the subroutine that computes the optimum entry rates.
 C
 C A SUMMARY OF THE SUBROUTINES 
@@ -36,9 +36,7 @@ C   by providing the correct path to the libraries
 C - set data in file "params.dat"
 C - run the program
 C       ./massn
-C
-C The process is little tedious, in particular for IPOPT.
-C
+C  
 C
 C KNOWN ISSUES AND POSSIBLE IMPROVEMENTS
 C
