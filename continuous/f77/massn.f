@@ -37,9 +37,7 @@ C - set data in file "params.dat"
 C - run the program
 C       ./massn
 C
-C The process is little tedious, in particular for IPOPT. Another
-C alternative, is that I can provide you with an access to my personal
-C server and you connect through SSH.
+C The process is little tedious, in particular for IPOPT.
 C
 C
 C KNOWN ISSUES AND POSSIBLE IMPROVEMENTS
