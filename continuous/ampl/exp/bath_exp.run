@@ -1,17 +1,11 @@
 # CLEAR MEMORY
 reset ;
 
-
-# set search path
-option ampl_include '/home/moez/Downloads/amplide.linux64/amplide/';
-
 # LOAD MODEL
-model '/home/moez/docs/progs/ampl/bathtub/cont/exp/bath_exp.mod' ;
-#model bath.mod ;
+model 'bath_exp.mod' ;
 
 # LOAD DATA
-data  '/home/moez/docs/progs/ampl/bathtub/cont/exp/bath_exp.dat' ; 
-#data  bath.dat ;
+data  'bath_exp.dat' ; 
 
 # Approximation grid
  
@@ -19,7 +13,6 @@ let q  := q0 + 1;
 param dL := L / q0  ;
 param nL := ( Mbar - M0 ) div  L  ;
 param q1 := 1+( ( Mbar - nL * L - M0 ) div dL );
-# param n  := q1 * ( nL + 1 ) + (q0-q1+2)*nL ;
 let n := q * nL + q1 + 1 ;
 param M1 := Mbar - nL * L ; 
 
@@ -43,8 +36,8 @@ for { i in q1+2..q } {
 display t[n+q] , util_exp;
 
 
-
-option solver '/home/moez/ulco/ampl/conopt' ;
+# Provide correct path to solver
+option solver 'conopt' ;
 
 option conopt_options 'outlev=3';
 option display_width 100 ;
@@ -63,8 +56,7 @@ var tt {i in 1..n} = t[i+q] ;
 
 option display_width 120 ;
 display t[1], t[n], t[n+q] , util_exp, util_exp / P,P;
-#display  B, e, k, v, ue_exp, ux_exp, t, tt ; 
 
-display  B, e, k, v, ue_exp, ux_exp, t,tt > '/home/moez/docs/progs/ampl/bathtub/cont/exp/exp2.out' ;
+display  B, e, k, v, ue_exp, ux_exp, t,tt > 'bath_exp.csv' ;
 
 end;
